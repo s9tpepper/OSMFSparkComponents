@@ -1,0 +1,93 @@
+The MIT License
+
+Copyright (c) 2010 Omar Gonzalez
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+
+OSMFSparkComponents
+================================================================================
+The OSMFSparkComponents library is a Spark (Flex 4) based code library that
+encapsulates the basic OSMF media player initialization while at the same time
+providing a Spark wrapper (OSMFSparkPlayer) that includes Spark based UI controls
+that can be easily skinned.
+
+The library also includes a playlist component that works with the OSMFSparkPlayer
+to easily create playlist functionality for OSMF supported media and a custom
+OSMF MediaElement called YouTubeElement that can be used to view YouTube urls
+along with the rest of your OSMF supported media in the same playlist.
+
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600" 
+			   creationComplete="osmfsparkplayer1_creationCompleteHandler(event)"
+			   xmlns:player="ab.osmf.spark.player.*" xmlns:playlist="ab.osmf.spark.player.playlist.*">
+	<fx:Script>
+		<![CDATA[
+			import ab.osmf.youtube.YouTubeMediaFactoryItem;
+			import ab.osmf.youtube.YouTubeUrlType;
+			
+			import mx.events.FlexEvent;
+			
+			protected function osmfsparkplayer1_creationCompleteHandler(event:FlexEvent):void
+			{
+				// Add YouTubeElement to the MediaFactory so YouTube is supported.
+					OSMFPlaylist.addUrlType("youtube", new YouTubeUrlType());
+					OSMFPlaylist.mediaFactory.addItem(new YouTubeMediaFactoryItem());
+				
+				// Make some data objects for the playlist
+					const seether:Object = new Object();
+					seether.myUrl = "http://www.youtube.com/watch?v=hPsQcB52V18";
+					seether.title = "Veruca Salt - Seether (Live in Glastonbury)";
+					seether.desc = "Veruca Salt perform Seether live in Glastonbury in 1995";
+					seether.thumb = "http://flavorwire.com/wp-content/uploads/2010/02/veruca-salt.jpg";
+					
+					const seether2:Object = new Object();
+					seether2.myUrl = "http://omar.likesflex.com/dev/tron.mp4";
+					seether2.title = "Tron";
+					seether2.desc = "A 5 second clip of Tron.";
+					seether2.thumb = "http://www.shadowandact.com/wp-content/uploads/2010/11/tron_legacy.jpg";
+				
+				// Set up the data provider array
+					const dataProvider:Array = new Array(seether2, seether, seether2, seether, seether2, seether, seether2, seether, seether2, seether);
+				
+				
+				// Configure the playlist so it knows what fields on your object to get data from.
+					myPlaylist.titleField			= "title";
+					myPlaylist.descriptionField		= "desc";
+					myPlaylist.thumbnailField		= "thumb";
+					myPlaylist.urlField				= "myUrl";
+				
+				// Add data to your playlist
+				myPlaylist.data = dataProvider;
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+	</fx:Declarations>
+	
+	<s:layout>
+		<s:HorizontalLayout gap="0" />
+	</s:layout>
+	
+	<player:OSMFSparkPlayer id="osmfPlayer" screenWidth="640" screenHeight="480" />
+	<playlist:OSMFPlaylist id="myPlaylist" player="{osmfPlayer}" height="{osmfPlayer.height}" width="400" />
+	
+</s:Application>
