@@ -38,11 +38,11 @@ along with the rest of your OSMF supported media in the same playlist.
 
 USAGE EXAMPLE:
 
-<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
-			   xmlns:s="library://ns.adobe.com/flex/spark"
-			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600" 
-			   creationComplete="osmfsparkplayer1_creationCompleteHandler(event)"
-			   xmlns:player="ab.osmf.spark.player.*" xmlns:playlist="ab.osmf.spark.player.playlist.*">
+<s:Application xmlns:fx='http://ns.adobe.com/mxml/2009' 
+			   xmlns:s='library://ns.adobe.com/flex/spark'
+			   xmlns:mx='library://ns.adobe.com/flex/mx' minWidth='955' minHeight='600' 
+			   creationComplete='osmfsparkplayer1_creationCompleteHandler(event)'
+			   xmlns:player='ab.osmf.spark.player.*' xmlns:playlist='ab.osmf.spark.player.playlist.*'>
 	<fx:Script>
 		<![CDATA[
 			import ab.osmf.youtube.YouTubeMediaFactoryItem;
@@ -53,31 +53,31 @@ USAGE EXAMPLE:
 			protected function osmfsparkplayer1_creationCompleteHandler(event:FlexEvent):void
 			{
 				// Add YouTubeElement to the MediaFactory so YouTube is supported.
-					OSMFPlaylist.addUrlType("youtube", new YouTubeUrlType());
+					OSMFPlaylist.addUrlType('youtube', new YouTubeUrlType());
 					OSMFPlaylist.mediaFactory.addItem(new YouTubeMediaFactoryItem());
 				
 				// Make some data objects for the playlist
 					const seether:Object = new Object();
-					seether.myUrl = "http://www.youtube.com/watch?v=hPsQcB52V18";
-					seether.title = "Veruca Salt - Seether (Live in Glastonbury)";
-					seether.desc = "Veruca Salt perform Seether live in Glastonbury in 1995";
-					seether.thumb = "http://flavorwire.com/wp-content/uploads/2010/02/veruca-salt.jpg";
+					seether.myUrl = 'http://www.youtube.com/watch?v=hPsQcB52V18';
+					seether.title = 'Veruca Salt - Seether (Live in Glastonbury)';
+					seether.desc = 'Veruca Salt perform Seether live in Glastonbury in 1995';
+					seether.thumb = 'http://flavorwire.com/wp-content/uploads/2010/02/veruca-salt.jpg';
 					
 					const tron:Object = new Object();
-					tron.myUrl = "http://omar.likesflex.com/dev/tron.mp4";
-					tron.title = "Tron";
-					tron.desc = "A 5 second clip of Tron.";
-					tron.thumb = "http://www.shadowandact.com/wp-content/uploads/2010/11/tron_legacy.jpg";
+					tron.myUrl = 'http://omar.likesflex.com/dev/tron.mp4';
+					tron.title = 'Tron';
+					tron.desc = 'A 5 second clip of Tron.';
+					tron.thumb = 'http://www.shadowandact.com/wp-content/uploads/2010/11/tron_legacy.jpg';
 				
 				// Set up the data provider array
 					const dataProvider:Array = new Array(tron, seether, tron, seether, tron, seether, tron, seether, tron, seether);
 				
 				
 				// Configure the playlist so it knows what fields on your object to get data from.
-					myPlaylist.titleField			= "title";
-					myPlaylist.descriptionField		= "desc";
-					myPlaylist.thumbnailField		= "thumb";
-					myPlaylist.urlField				= "myUrl";
+					myPlaylist.titleField			= 'title';
+					myPlaylist.descriptionField		= 'desc';
+					myPlaylist.thumbnailField		= 'thumb';
+					myPlaylist.urlField				= 'myUrl';
 				
 				// Add data to your playlist
 				myPlaylist.data = dataProvider;
@@ -89,10 +89,10 @@ USAGE EXAMPLE:
 	</fx:Declarations>
 	
 	<s:layout>
-		<s:HorizontalLayout gap="0" />
+		<s:HorizontalLayout gap='0' />
 	</s:layout>
 	
-	<player:OSMFSparkPlayer id="osmfPlayer" screenWidth="640" screenHeight="480" />
-	<playlist:OSMFPlaylist id="myPlaylist" player="{osmfPlayer}" height="{osmfPlayer.height}" width="400" />
+	<player:OSMFSparkPlayer id='osmfPlayer' screenWidth='640' screenHeight='480' />
+	<playlist:OSMFPlaylist id='myPlaylist' player='{osmfPlayer}' height='{osmfPlayer.height}' width='400' />
 	
 </s:Application>
