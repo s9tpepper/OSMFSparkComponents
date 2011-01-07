@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:s="library://ns.adobe.com/flex/spark"
+		xmlns:fx="http://ns.adobe.com/mxml/2009"
+		xmlns:fc="http://ns.adobe.com/flashcatalyst/2009"
+		xmlns:d="http://ns.adobe.com/fxg/2008/dt"
+		xmlns:ai="http://ns.adobe.com/ai/2009"
+		xmlns:flm="http://ns.adobe.com/flame/2008" xmlns:mx="library://ns.adobe.com/flex/mx">
+	<!-- host component -->
+	<fx:Metadata>
+		[HostComponent("ab.osmf.spark.player.playlist.PlaylistRenderer")]
+	</fx:Metadata>
+	
+	<!-- SkinParts
+	name=ui_txt_title, type=spark.components.supportClasses.TextBase, required=true
+	name=ui_img_thumbnail, type=mx.controls.Image, required=true
+	name=ui_txt_description, type=spark.components.supportClasses.TextBase, required=true
+	-->
+	
+	<s:Rect x="0" y="0" alpha="0.5" width="400" height="90" d:userLabel="rendererBackground">
+		<s:fill>
+			<s:LinearGradient x="200.235" y="0" scaleX="89.6309" rotation="90">
+				<s:GradientEntry ratio="0" color="#646464"/>
+				<s:GradientEntry ratio="0.5" color="#272D36"/>
+				<s:GradientEntry ratio="0.5" color="#282828"/>
+				<s:GradientEntry ratio="1" color="#3C3C3C"/>
+			</s:LinearGradient>
+		</s:fill>
+	</s:Rect>
+	<s:Group x="10" y="10">
+		<s:Rect width="70" height="70" d:userLabel="thumbnailBackground">
+			<s:fill>
+				<s:LinearGradient x="35" y="0" scaleX="70" rotation="90">
+					<s:GradientEntry ratio="0" color="#646464"/>
+					<s:GradientEntry ratio="0.5" color="#272D36"/>
+					<s:GradientEntry ratio="0.5" color="#282828"/>
+					<s:GradientEntry ratio="1" color="#3C3C3C"/>
+				</s:LinearGradient>
+			</s:fill>
+		</s:Rect>
+		<mx:Image id="ui_img_thumbnail" x="10" y="10" width="50" height="50" />
+	</s:Group>
+	<s:RichText id="ui_txt_title" ai:aa="2" color="#FFFFFF" columnCount="1" fontFamily="Helvetica Neue" fontSize="14" d:id="24" kerning="on" 
+				tabStops="S28.6018009185791 S57.2036018371582 S85.8054027557373 S114.407203674316 S143.009004592896 S171.610805511475 S200.212606430054 S228.814407348633" 
+				d:userLabel="descriptionLabel" flm:variant="9" whiteSpaceCollapse="preserve" left="92" y="32" width="298" maxDisplayedLines="1"/>
+	<s:RichText id="ui_txt_description" d:id="23" d:userLabel="titleLabel" y="8" left="92"
+				width="298" ai:aa="2" color="#FFFFFF" columnCount="1" fontFamily="Helvetica Neue"
+				fontSize="16" fontWeight="bold" kerning="on" maxDisplayedLines="1"
+				tabStops="S28.6018009185791 S57.2036018371582 S85.8054027557373 S114.407203674316 S143.009004592896 S171.610805511475 S200.212606430054 S228.814407348633 S257.416208267212 S286.018009185791"
+				flm:variant="8" whiteSpaceCollapse="preserve"/>
+	
+</s:Skin>

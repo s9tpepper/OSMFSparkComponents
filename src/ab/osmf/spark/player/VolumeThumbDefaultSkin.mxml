@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		xmlns:mx="library://ns.adobe.com/flex/mx">
+	<!-- host component -->
+	<fx:Metadata>
+		[HostComponent("spark.components.Button")]
+	</fx:Metadata>
+	
+	<!-- states -->
+	<s:states>
+		<s:State name="disabled" />
+		<s:State name="down" />
+		<s:State name="over" />
+		<s:State name="up" />
+	</s:states>
+	
+	<!-- SkinParts
+	name=labelDisplay, type=spark.components.supportClasses.TextBase, required=false
+	-->
+	
+	<s:Ellipse x="0" y="-2.5" width="11" height="11">
+		<s:fill>
+			<s:LinearGradient x="5.5498" y="0.630371" scaleX="8.96551" rotation="90">
+				<s:GradientEntry ratio="0" color="#FF0000"/>
+				<s:GradientEntry ratio="1" color="#AF1923"/>
+			</s:LinearGradient>
+		</s:fill>
+	</s:Ellipse>
+	
+</s:Skin>

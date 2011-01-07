@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:s="library://ns.adobe.com/flex/spark"
+		xmlns:fx="http://ns.adobe.com/mxml/2009"
+		xmlns:fc="http://ns.adobe.com/flashcatalyst/2009"
+		xmlns:d="http://ns.adobe.com/fxg/2008/dt"
+		xmlns:flm="http://ns.adobe.com/flame/2008"
+		width="13" height="16" fc:resizable="true">
+	<fx:Metadata>[HostComponent("spark.components.Button")]</fx:Metadata>
+	<s:states>
+		<s:State name="up"/>
+		<s:State name="over"/>
+		<s:State name="down"/>
+		<s:State name="disabled"/>
+	</s:states>
+	<s:Group d:userLabel="playIcon" x="0" y="0">
+		<s:Path d:id="7" x="-0.018" y="0.854"
+				data="M 12.221 7.252 C 12.226 7.571 10.629 8.656 10.629 8.656 L 3.189 13.569 C 3.189 13.569 1.989 14.53 1.043 14.503 C 0.592 14.491 0 14.194 0 13.164 L 0 1.34 C 0 0.331 0.596 0.032 1.024 0.003 C 1.967 -0.057 3.189 0.937 3.189 0.937 L 10.629 5.849 C 10.629 5.849 12.216 6.924 12.221 7.252 Z"
+				flm:variant="3" winding="nonZero">
+			<s:fill>
+				<s:RadialGradient x="6.111" y="-10.589" scaleX="71.089" scaleY="71.089">
+					<s:GradientEntry ratio="0" color="#D6D6D6"/>
+					<s:GradientEntry ratio="0.485714" color="#D6D6D6"/>
+					<s:GradientEntry ratio="0.508727" color="#C6C6C6"/>
+					<s:GradientEntry ratio="0.555024" color="#C4C4C4"/>
+					<s:GradientEntry ratio="0.650056" color="#D4D4D4"/>
+					<s:GradientEntry ratio="0.75166" color="#DFDFDF"/>
+					<s:GradientEntry ratio="1" color="#E6E6E6"/>
+				</s:RadialGradient>
+			</s:fill>
+		</s:Path>
+	</s:Group>
+</s:Skin>

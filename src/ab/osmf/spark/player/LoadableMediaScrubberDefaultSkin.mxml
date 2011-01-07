@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		xmlns:mx="library://ns.adobe.com/flex/mx">
+	<!-- host component -->
+	<fx:Metadata>
+		[HostComponent("ab.osmf.spark.player.LoadableMediaScrubber")]
+	</fx:Metadata>
+	
+	<!-- SkinParts
+	name=ui_rect_downloadProgress, type=spark.primitives.Rect, required=true
+	name=ui_btn_thumb, type=spark.components.Button, required=false
+	name=ui_btn_track, type=spark.components.Button, required=true
+	name=ui_rect_playbackProgress, type=spark.primitives.Rect, required=true
+	-->
+	
+	<s:Group width="100%" height="9">
+		
+		<s:Button id="ui_btn_track" width="125" height="9" alpha="0" />
+		<s:Rect x="0" y="-1" width="125" height="9">
+			<s:stroke>
+				<s:SolidColorStroke weight="1" caps="none" joints="miter" miterLimit="4" color="#AAABAB"/>
+			</s:stroke>
+		</s:Rect>
+		<s:Line x="0" y="8" xTo="125">
+			<s:stroke>
+				<s:SolidColorStroke weight="1" caps="none" joints="miter" miterLimit="4" color="#646464"/>
+			</s:stroke>
+		</s:Line>
+		
+		<s:Rect id="ui_rect_downloadProgress" x="0" y="-1" width="125" height="9">
+			<s:fill>
+				<s:LinearGradient x="62.5361" y="9.65234" scaleX="8.16851" rotation="270">
+					<s:GradientEntry ratio="0" color="#444444"/>
+					<s:GradientEntry ratio="1"/>
+				</s:LinearGradient>
+			</s:fill>
+			<s:stroke>
+				<s:SolidColorStroke weight="1" caps="none" joints="miter" miterLimit="4" color="#AAABAB"/>
+			</s:stroke>
+		</s:Rect>
+		
+		<s:Rect id="ui_rect_playbackProgress" x="1" y="2" alpha="0.5" width="125" height="4" scaleX="0">
+			<s:fill>
+				<s:LinearGradient x="21.2661" y="4.77734" scaleX="4.04285" rotation="270">
+					<s:GradientEntry ratio="0" color="#FF0000"/>
+					<s:GradientEntry ratio="1" color="#AF1923"/>
+				</s:LinearGradient>
+			</s:fill>
+		</s:Rect>
+		
+		
+		<s:Button id="ui_btn_thumb" width="10" height="9" alpha="0" />
+		
+		
+		
+	</s:Group>
+	
+</s:Skin>

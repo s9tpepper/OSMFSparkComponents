@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:s="library://ns.adobe.com/flex/spark"
+		xmlns:fx="http://ns.adobe.com/mxml/2009"
+		xmlns:fc="http://ns.adobe.com/flashcatalyst/2009"
+		xmlns:d="http://ns.adobe.com/fxg/2008/dt"
+		xmlns:flm="http://ns.adobe.com/flame/2008"
+		width="12" height="14" fc:resizable="true">
+	<fx:Metadata>[HostComponent("spark.components.Button")]</fx:Metadata>
+	<s:states>
+		<s:State name="up"/>
+		<s:State name="over"/>
+		<s:State name="down"/>
+		<s:State name="disabled"/>
+	</s:states>
+	<s:Group x="0" y="0" d:userLabel="pauseIcon">
+		<s:Path d:id="9" x="-0.018" y="0.107"
+				data="M 1.642 0 C 1.642 0 0 0 0 1.644 C 0 3.285 0 11.497 0 11.497 C 0 11.497 0 13.139 1.642 13.139 C 3.285 13.139 3.05 13.139 3.05 13.139 C 3.05 13.139 4.694 13.139 4.694 11.497 C 4.694 9.854 4.694 1.644 4.694 1.644 C 4.694 1.644 4.694 0 3.05 0 C 1.408 0 1.642 0 1.642 0 Z"
+				flm:variant="4" winding="nonZero">
+			<s:fill>
+				<s:RadialGradient x="5.631" y="-11.27" scaleX="70.9648" scaleY="70.9648">
+					<s:GradientEntry ratio="0" color="#D6D6D6"/>
+					<s:GradientEntry ratio="0.485714" color="#D6D6D6"/>
+					<s:GradientEntry ratio="0.508727" color="#C6C6C6"/>
+					<s:GradientEntry ratio="0.555024" color="#C4C4C4"/>
+					<s:GradientEntry ratio="0.650056" color="#D4D4D4"/>
+					<s:GradientEntry ratio="0.75166" color="#DFDFDF"/>
+					<s:GradientEntry ratio="1" color="#E6E6E6"/>
+				</s:RadialGradient>
+			</s:fill>
+		</s:Path>
+		<s:Path d:id="10" x="6.55" y="0.107"
+				data="M 1.644 0 C 1.644 0 0 0 0 1.644 C 0 3.285 0 11.497 0 11.497 C 0 11.497 0 13.139 1.644 13.139 C 3.286 13.139 3.051 13.139 3.051 13.139 C 3.051 13.139 4.692 13.139 4.692 11.497 C 4.692 9.854 4.692 1.644 4.692 1.644 C 4.692 1.644 4.692 0 3.051 0 C 1.409 0 1.644 0 1.644 0 Z"
+				flm:variant="5" winding="nonZero">
+			<s:fill>
+				<s:RadialGradient x="-0.938" y="-11.27" scaleX="70.9646" scaleY="70.9646">
+					<s:GradientEntry ratio="0" color="#D6D6D6"/>
+					<s:GradientEntry ratio="0.485714" color="#D6D6D6"/>
+					<s:GradientEntry ratio="0.508727" color="#C6C6C6"/>
+					<s:GradientEntry ratio="0.555024" color="#C4C4C4"/>
+					<s:GradientEntry ratio="0.650056" color="#D4D4D4"/>
+					<s:GradientEntry ratio="0.75166" color="#DFDFDF"/>
+					<s:GradientEntry ratio="1" color="#E6E6E6"/>
+				</s:RadialGradient>
+			</s:fill>
+		</s:Path>
+	</s:Group>
+</s:Skin>

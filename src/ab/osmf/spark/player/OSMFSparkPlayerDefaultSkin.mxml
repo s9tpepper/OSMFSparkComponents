@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:player="ab.osmf.spark.player.*">
+	<!-- host component -->
+	<fx:Metadata>
+		[HostComponent("ab.osmf.spark.player.OSMFSparkPlayer")]
+	</fx:Metadata>
+	
+	<s:states>
+		<s:State name="stopped" stateGroups="stoppedStates" />
+		<s:State name="playing" />
+		<s:State name="paused" stateGroups="stoppedStates" />
+	</s:states>
+	
+	<!-- SkinParts
+	name=ui_txt_remainingTimeDisplay, type=spark.components.supportClasses.TextBase, required=false
+	name=ui_volumeControl, type=ab.osmf.spark.player.VolumeControl, required=false
+	name=ui_txt_elapsedTimeDisplay, type=spark.components.supportClasses.TextBase, required=false
+	name=ui_btn_pause, type=spark.components.Button, required=false
+	name=ui_btn_play, type=spark.components.Button, required=false
+	name=ui_loadableMediaScrubber, type=ab.osmf.spark.player.LoadableMediaScrubber, required=false
+	name=ui_mediaContainer, type=ab.osmf.spark.player.SparkMediaContainer, required=false
+	-->
+	
+	<s:layout>
+		<s:VerticalLayout gap="0"/>
+	</s:layout>
+	
+	<player:SparkMediaContainer id="ui_mediaContainer" />
+	
+	<s:SkinnableContainer backgroundColor="#000000" width="{ui_mediaContainer.width}" height="26">
+		
+		<s:Rect x="0" y="0" width="100%" height="26" alpha="0.5">
+			<s:fill>
+				<s:LinearGradient x="200.235" y="0" scaleX="26.0869" rotation="90">
+					<s:GradientEntry ratio="0" color="#646464"/>
+					<s:GradientEntry ratio="0.5" color="#272D36"/>
+					<s:GradientEntry ratio="0.5" color="#282828"/>
+					<s:GradientEntry ratio="1" color="#3C3C3C"/>
+				</s:LinearGradient>
+			</s:fill>
+		</s:Rect>
+		
+		<s:HGroup width="100%" height="26" verticalAlign="middle" paddingLeft="13" gap="8">
+			
+			<s:Group>
+				<s:Button id="ui_btn_pause" includeIn="playing" skinClass="ab.osmf.spark.player.PauseButtonDefaultSkin" />
+				<s:Button id="ui_btn_play" includeIn="stoppedStates" skinClass="ab.osmf.spark.player.PlayButtonDefaultSkin" />
+			</s:Group>
+			
+			<player:LoadableMediaScrubber id="ui_loadableMediaScrubber" height="9" />
+			
+			
+			<s:RichText id="ui_txt_elapsedTimeDisplay" color="#FFFFFF" columnCount="1" width="60" textAlign="right"
+						fontFamily="Arial" fontSize="12.7119" kerning="on" tabStops="S28.6018009185791" text="0:00" whiteSpaceCollapse="preserve"/>
+			<s:RichText color="#FFFFFF" columnCount="1" text="/" 
+						fontFamily="Arial" fontSize="12.7119" kerning="on" tabStops="S28.6018009185791" whiteSpaceCollapse="preserve"/>
+			<s:RichText id="ui_txt_remainingTimeDisplay" color="#FFFFFF" columnCount="1" width="60"
+						fontFamily="Arial" fontSize="12.7119" kerning="on" tabStops="S28.6018009185791" text="0:00" whiteSpaceCollapse="preserve"/>
+			
+			
+			<player:VolumeControl id="ui_volumeControl" />
+			
+		</s:HGroup>
+	</s:SkinnableContainer>
+	
+</s:Skin>

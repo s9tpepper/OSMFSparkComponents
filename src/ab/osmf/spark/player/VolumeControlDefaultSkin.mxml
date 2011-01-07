@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		xmlns:mx="library://ns.adobe.com/flex/mx">
+	<!-- host component -->
+	<fx:Metadata>
+		[HostComponent("ab.osmf.spark.player.VolumeControl")]
+	</fx:Metadata>
+	
+	<!-- states -->
+	<s:states>
+		<s:State name="closed" />
+		<s:State name="open" />
+	</s:states>
+	
+	<!-- SkinParts
+	name=ui_volumeSlider, type=spark.components.supportClasses.SliderBase, required=true
+	name=ui_btn_volumeIcon, type=spark.components.Button, required=true
+	-->
+	
+	<s:layout>
+		<s:HorizontalLayout verticalAlign="middle"/>
+	</s:layout>
+	
+	<s:Button id="ui_btn_volumeIcon" skinClass="ab.osmf.spark.player.MuteButtonDefaultSkin" />
+	<s:HSlider id="ui_volumeSlider" skinClass="ab.osmf.spark.player.VolumeSliderDefaultSkin" height="4" />
+	
+</s:Skin>

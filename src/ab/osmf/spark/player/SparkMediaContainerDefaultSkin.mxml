@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		xmlns:mx="library://ns.adobe.com/flex/mx">
+	<!-- host component -->
+	<fx:Metadata>
+		[HostComponent("ab.osmf.spark.player.SparkMediaContainer")]
+	</fx:Metadata>
+	
+	<!-- SkinParts
+	name=ui_mediaPlayerContainer, type=spark.components.SkinnableContainer, required=true
+	-->
+	
+	<s:SkinnableContainer id="ui_mediaPlayerContainer" 
+						  top="0" right="0" left="0" bottom="0" />
+	
+</s:Skin>

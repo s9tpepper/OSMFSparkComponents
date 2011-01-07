@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:s="library://ns.adobe.com/flex/spark"
+		xmlns:fx="http://ns.adobe.com/mxml/2009"
+		xmlns:fc="http://ns.adobe.com/flashcatalyst/2009"
+		xmlns:d="http://ns.adobe.com/fxg/2008/dt"
+		xmlns:flm="http://ns.adobe.com/flame/2008"
+		fc:resizable="false">
+	<fx:Metadata>[HostComponent("spark.components.Button")]</fx:Metadata>
+	<s:states>
+		<s:State name="up"/>
+		<s:State name="over"/>
+		<s:State name="down"/>
+		<s:State name="disabled"/>
+	</s:states>
+	<fx:DesignLayer d:id="15" d:userLabel="ui_btn_volumeMute">
+		<s:Path x="0.297" y="-0.259" alpha="0.5" winding="nonZero" data="M 10.736 0.656 C 10.736 0.039 10.35 -0.183 9.881 0.163 L 4.703 3.967 C 4.23 4.313 3.381 4.595 2.813 4.595 L 1.034 4.595 C 0.467 4.595 0 5.102 0 5.717 L 0 10.027 C 0 10.644 0.467 11.149 1.034 11.149 L 2.813 11.149 C 3.381 11.149 4.23 11.432 4.703 11.777 L 9.881 15.581 C 10.35 15.927 10.736 15.705 10.736 15.089 L 10.736 0.656 Z">
+			<s:fill>
+				<s:LinearGradient x="5.368" y="15.744" scaleX="15.7451" rotation="270">
+					<s:GradientEntry ratio="0" color="#777777"/>
+					<s:GradientEntry ratio="1" color="#323232"/>
+				</s:LinearGradient>
+			</s:fill>
+		</s:Path>
+		<s:Path x="1.105" y="1.417" winding="nonZero" flm:variant="7" d:id="16" data="M 8.944 0.505 C 8.944 0.03 8.623 -0.141 8.231 0.125 L 3.918 3.045 C 3.525 3.31 2.817 3.528 2.344 3.528 L 0.862 3.528 C 0.389 3.528 0 3.915 0 4.389 L 0 7.698 C 0 8.172 0.389 8.56 0.862 8.56 L 2.344 8.56 C 2.817 8.56 3.525 8.776 3.918 9.042 L 8.231 11.964 C 8.623 12.229 8.944 12.059 8.944 11.584 L 8.944 0.505 Z">
+			<s:fill>
+				<s:LinearGradient x="4.473" y="12.089" scaleX="12.0889" rotation="270">
+					<s:GradientEntry ratio="0" color="#E6E6E6"/>
+					<s:GradientEntry ratio="0.561798" color="#AFAFAF"/>
+					<s:GradientEntry ratio="0.565169" color="#BDBDBD"/>
+					<s:GradientEntry ratio="0.569259" color="#C5C5C5"/>
+					<s:GradientEntry ratio="0.58427" color="#C8C8C8"/>
+					<s:GradientEntry ratio="1" color="#E6E6E6"/>
+				</s:LinearGradient>
+			</s:fill>
+		</s:Path>
+	</fx:DesignLayer>
+</s:Skin>
