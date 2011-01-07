@@ -11,7 +11,7 @@
 	name=ui_mediaPlayerContainer, type=spark.components.SkinnableContainer, required=true
 	-->
 	
-	<s:SkinnableContainer id="ui_mediaPlayerContainer" 
+	<s:SkinnableContainer id="ui_mediaPlayerContainer" backgroundColor="#000000"
 						  top="0" right="0" left="0" bottom="0" />
 	
 </s:Skin>
