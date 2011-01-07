@@ -1,0 +1,12 @@
+bin
+bin-debug
+.actionScriptProperties
+.flexLibProperties
+.DS_Store
+.project
+.settings
+.sourceMate
+.svn
+*.as3proj
+
+
