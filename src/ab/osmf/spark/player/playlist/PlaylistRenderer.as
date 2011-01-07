@@ -3,6 +3,7 @@ package ab.osmf.spark.player.playlist
 	import almerblank.flex.spark.components.SkinnableItemRenderer;
 	
 	import mx.controls.Image;
+	import mx.events.FlexEvent;
 	import mx.utils.ObjectUtil;
 	
 	import org.osmf.media.MediaElement;
@@ -49,6 +50,12 @@ package ab.osmf.spark.player.playlist
 		private var _titleField:String				= "title";
 		private var _descriptionField:String		= "description";
 		private var _thumbnailField:String			= "thumbnail";
+		/**
+		 * Used to prevent the DATA_CHANGE event to slow down the list as this
+		 * event is dispatched sporadically instead of _only_ when the actual
+		 * data is changed. 
+		 */		
+		private var _lastSetData:Object;
 		
 		public function PlaylistRenderer()
 		{
@@ -59,7 +66,33 @@ package ab.osmf.spark.player.playlist
 		private function _init():void
 		{
 			setStyle("skinClass", PlaylistRendererDefaultSkin);
+			addEventListener(FlexEvent.DATA_CHANGE, _handleDataChange,false,0,true);
+			addEventListener(FlexEvent.CREATION_COMPLETE, _handleCreationComplete,false,0,true);
 		}
+
+		private function _handleCreationComplete(event:FlexEvent):void
+		{
+			_setDisplay();
+		}
+
+		private function _handleDataChange(event:FlexEvent):void
+		{
+			_setDisplay();
+		}
+
+		private function _setDisplay():void
+		{
+			if (data && data !== _lastSetData)
+			{
+				_lastSetData = data;
+				
+				_updateMediaElement();
+				_setDescription();
+				_setThumbnail();
+				_setTitle();
+			}
+		}
+
 
 		private function _updateMediaElement():void
 		{

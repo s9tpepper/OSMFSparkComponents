@@ -33,6 +33,11 @@ to easily create playlist functionality for OSMF supported media and a custom
 OSMF MediaElement called YouTubeElement that can be used to view YouTube urls
 along with the rest of your OSMF supported media in the same playlist.
 
+
+
+
+USAGE EXAMPLE:
+
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
 			   xmlns:s="library://ns.adobe.com/flex/spark"
 			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600" 
@@ -58,14 +63,14 @@ along with the rest of your OSMF supported media in the same playlist.
 					seether.desc = "Veruca Salt perform Seether live in Glastonbury in 1995";
 					seether.thumb = "http://flavorwire.com/wp-content/uploads/2010/02/veruca-salt.jpg";
 					
-					const seether2:Object = new Object();
-					seether2.myUrl = "http://omar.likesflex.com/dev/tron.mp4";
-					seether2.title = "Tron";
-					seether2.desc = "A 5 second clip of Tron.";
-					seether2.thumb = "http://www.shadowandact.com/wp-content/uploads/2010/11/tron_legacy.jpg";
+					const tron:Object = new Object();
+					tron.myUrl = "http://omar.likesflex.com/dev/tron.mp4";
+					tron.title = "Tron";
+					tron.desc = "A 5 second clip of Tron.";
+					tron.thumb = "http://www.shadowandact.com/wp-content/uploads/2010/11/tron_legacy.jpg";
 				
 				// Set up the data provider array
-					const dataProvider:Array = new Array(seether2, seether, seether2, seether, seether2, seether, seether2, seether, seether2, seether);
+					const dataProvider:Array = new Array(tron, seether, tron, seether, tron, seether, tron, seether, tron, seether);
 				
 				
 				// Configure the playlist so it knows what fields on your object to get data from.
