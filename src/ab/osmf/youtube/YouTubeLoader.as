@@ -7,6 +7,7 @@ package ab.osmf.youtube
 	import flash.net.URLRequest;
 	import flash.system.ApplicationDomain;
 	import flash.system.LoaderContext;
+	import flash.system.SecurityDomain;
 	import flash.utils.setTimeout;
 	
 	import mx.core.FlexGlobals;
@@ -81,10 +82,13 @@ package ab.osmf.youtube
 			_loadTrait = loadTrait;
 			
 			_loader = new Loader();
+			_loader.mouseChildren = false;
+			_loader.mouseEnabled = false;
 			LoaderLoadTrait(_loadTrait).loader = _loader;
 			_loader.contentLoaderInfo.addEventListener(Event.INIT,_handleInit,false,0,true);
 			var lc:LoaderContext = new LoaderContext();
 			lc.applicationDomain = ApplicationDomain.currentDomain;
+//			lc.securityDomain = SecurityDomain.currentDomain;
 			
 			
 			_loader.contentLoaderInfo.addEventListener(Event.COMPLETE, onLoadComplete);
@@ -131,7 +135,7 @@ package ab.osmf.youtube
 		{
 			if (_loadTrait.loadState == LoadState.LOADING)
 			{
-					updateLoadTrait(_loadTrait, LoadState.READY);
+				updateLoadTrait(_loadTrait, LoadState.READY);
 			}
 		}
 		
