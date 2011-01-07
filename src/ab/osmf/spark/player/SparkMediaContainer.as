@@ -56,7 +56,13 @@ package ab.osmf.spark.player
 		public function addMedia(mediaElement:MediaElement):void
 		{
 			mediaContainer.addMediaElement(mediaElement);
+			
 			/**TRACEDISABLE:trace("SparkMediaContainer :: addMedia()");*/
+		}
+		
+		public function removeMediaElement(mediaElement:MediaElement):void
+		{
+			mediaContainer.removeMediaElement(mediaElement);
 		}
 		
 		override protected function getCurrentSkinState():String
