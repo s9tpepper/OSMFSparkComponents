@@ -130,6 +130,11 @@ package ab.osmf.spark.player
 
 		public function set mediaElement(value:MediaElement):void
 		{
+			if (_mediaElement && ui_mediaContainer)
+			{
+				ui_mediaContainer.removeMediaElement(_mediaElement);
+			}
+			
 			_mediaElement = value;
 			
 			_setMediaElement();
@@ -167,6 +172,21 @@ package ab.osmf.spark.player
 		public function play():void
 		{
 			_mediaPlayer.play();
+		}
+		
+		public function pause():void
+		{
+			_mediaPlayer.pause();
+		}
+		
+		public function stop():void
+		{
+			_mediaPlayer.stop();
+		}
+		
+		public function get isPlaying():Boolean
+		{
+			return _mediaPlayer.playing;
 		}
 
 		/**
