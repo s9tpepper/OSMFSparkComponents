@@ -5,6 +5,7 @@ package ab.osmf.youtube
 	
 	import flash.display.Loader;
 	import flash.system.Security;
+	import flash.system.SecurityDomain;
 	
 	import mx.core.FlexGlobals;
 	import mx.core.UIComponent;
@@ -41,9 +42,12 @@ package ab.osmf.youtube
 
 		public function YouTubeElement(youTubeResource:YouTubeResource=null)
 		{
-			Security.allowDomain("www.youtube.com");
-			Security.allowDomain("s.ytimg.com");
-			Security.allowDomain("t.ytimg.com");
+			Security.allowDomain("http://www.youtube.com");
+			Security.allowDomain("http://s.ytimg.com");
+			Security.allowDomain("http://t.ytimg.com");
+			Security.allowInsecureDomain("http://www.youtube.com");
+			Security.allowInsecureDomain("http://s.ytimg.com");
+			Security.allowInsecureDomain("http://t.ytimg.com");
 			
 			_youTubeResource = youTubeResource;
 			
