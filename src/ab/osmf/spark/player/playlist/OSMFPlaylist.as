@@ -12,10 +12,12 @@ package ab.osmf.spark.player.playlist
 	import mx.core.ClassFactory;
 	import mx.core.IDataRenderer;
 	import mx.events.FlexEvent;
+	import mx.utils.ObjectUtil;
 	
 	import org.osmf.media.DefaultMediaFactory;
 	import org.osmf.media.MediaElement;
 	import org.osmf.media.MediaFactory;
+	import org.osmf.media.MediaResourceBase;
 	import org.osmf.media.URLResource;
 	
 	import spark.components.List;
@@ -190,7 +192,6 @@ package ab.osmf.spark.player.playlist
 		private function _initializePlayer():void
 		{
 			/**TRACEDISABLE:trace("_initializePlayer()");*/
-			// TODO: Initialize the OSMFSparkPlayer instance to work with the playlist
 			if (_player)
 			{
 				/**TRACEDISABLE:trace("_player = " + _player);*/
@@ -213,8 +214,25 @@ package ab.osmf.spark.player.playlist
 			
 			if (item)
 			{
-				const element:MediaElement = OSMFPlaylist.mediaFactory.createMediaElement(_getUrlResource(item[_urlField]));
-				_player.mediaElement = element;
+				var itemUrl:String = "";
+				try
+				{
+					itemUrl = item[_urlField];
+				}
+				catch (e:Error){}
+				
+				if (itemUrl && itemUrl.length)
+				{
+					const mediaResourceBase:MediaResourceBase = _getUrlResource(itemUrl);
+					
+					if (mediaResourceBase)
+					{
+						const element:MediaElement = OSMFPlaylist.mediaFactory.createMediaElement(mediaResourceBase);
+						
+						if (element)
+							_player.mediaElement = element;
+					}
+				}
 			}
 		}
 
@@ -223,7 +241,10 @@ package ab.osmf.spark.player.playlist
 			/**TRACEDISABLE:trace("media finished playing");*/
 			if (enablePlaylistCycling)
 			{
-				_playVideo(_cursor++);
+				/**TRACEDISABLE:trace("Finished playing index: " + _cursor);*/
+				var nextIndex:Number = _cursor + 1;
+				/**TRACEDISABLE:trace("Next video index: " + nextIndex);*/
+				_playVideo(nextIndex);
 			}
 		}
 
@@ -231,6 +252,8 @@ package ab.osmf.spark.player.playlist
 		{
 			if (!_data)
 				return;
+			
+			_cursor = index;
 			
 			if (loopPlaylist)
 			{
@@ -247,8 +270,9 @@ package ab.osmf.spark.player.playlist
 			}
 			
 			_setMediaElementFromPlaylistIndex(_cursor);
-			//_player.play();
 			
+			// TODO: Come back and remove this when this is fixed (play causes RTE randomly)
+//			_player.play();
 			setTimeout(_player.play, 1000);
 		}
 		
@@ -323,15 +347,20 @@ package ab.osmf.spark.player.playlist
 			/**TRACEDISABLE:trace("event.currentTarget = " + event.currentTarget);*/
 			if (_enablePlaylistItemClickToPlay)
 			{
-				const dataRenderer:IDataRenderer = event.currentTarget as IDataRenderer;
-				/**TRACEDISABLE:trace("dataRenderer = " + dataRenderer);*/
-				if (dataRenderer)
+				/**TRACEDISABLE:trace("clicked index is: " + ui_list_media.selectedIndex);*/
+				
+				if (_player.isPlaying)
 				{
-					const mediaIndex:uint = _dataProvider.getItemIndex(dataRenderer.data);
-					if (_player)
-					{
-						_playVideo(mediaIndex);
-					}
+					// Set _cursor to the index before the selection and trigger end of video by calling stop().
+					// MediaPlayer set STOPPED state when it reaches the end of the video or if you call stop().
+					// This is the most reliable way to get it to stop and have the media player work properly
+					// when the next media element is set.
+					_cursor = ui_list_media.selectedIndex - 1;
+					_player.stop();
+				}
+				else
+				{
+					_playVideo(ui_list_media.selectedIndex);
 				}
 			}
 		}
