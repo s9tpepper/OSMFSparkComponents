@@ -1,5 +1,6 @@
 bin
 bin-debug
+bin-release
 .actionScriptProperties
 .flexLibProperties
 .DS_Store
