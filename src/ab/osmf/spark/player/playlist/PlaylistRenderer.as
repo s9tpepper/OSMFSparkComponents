@@ -78,6 +78,7 @@ package ab.osmf.spark.player.playlist
 		 */		
 		protected var skinPartInitializationClosures:Dictionary;
 		
+
 		/**
 		 * The urlField setter defines which field on the data objects
 		 * to use to retrieve the media URL for loading.
@@ -89,6 +90,10 @@ package ab.osmf.spark.player.playlist
 		{
 			_urlField = value;
 			updateMediaElement();
+		}
+		public function get urlField():String
+		{
+			return _urlField;
 		}
 		/**
 		 * The titleField setter defines which field on the data objects
@@ -102,6 +107,10 @@ package ab.osmf.spark.player.playlist
 			_titleField = value;
 			setTitle();
 		}
+		public function get titleField():String
+		{
+			return _titleField;
+		}
 		/**
 		 * The descriptionField setter defines which field on the data objects
 		 * to use to retrieve the media description for display.
@@ -114,6 +123,11 @@ package ab.osmf.spark.player.playlist
 			_descriptionField = value;
 			setDescription();
 		}
+		public function get descriptionField():String
+		{
+			return _descriptionField;
+		}
+		
 		/**
 		 * The thumbnailField setter defines which field on the data objects
 		 * to use to retrieve the media thumbnail for display.
@@ -125,6 +139,51 @@ package ab.osmf.spark.player.playlist
 		{
 			_thumbnailField = value;
 			setThumbnail();
+		}
+		public function get thumbnailField():String
+		{
+			return _thumbnailField;
+		}
+		
+		/**
+		 * Returns the current thumbnail string in the data of this playlist renderer instance.
+		 * 
+		 * @return 
+		 * 
+		 */		
+		public function get thumbnail():String
+		{
+			return (data && _thumbnailField && data[_thumbnailField]) ? data[_thumbnailField] : "";
+		}
+		/**
+		 * Returns the current title string in the data of this playlist renderer instance.
+		 * 
+		 * @return 
+		 * 
+		 */	
+		public function get title():String
+		{
+			return (data && _titleField && data[_titleField]) ? data[_titleField] : "";
+		}
+		/**
+		 * Returns the current description string in the data of this playlist renderer instance.
+		 * 
+		 * @return 
+		 * 
+		 */	
+		public function get description():String
+		{
+			return (data && _descriptionField && data[_descriptionField]) ? data[_descriptionField] : "";
+		}
+		/**
+		 * Returns the current url string in the data of this playlist renderer instance.
+		 * 
+		 * @return 
+		 * 
+		 */	
+		public function get url():String
+		{
+			return (data && _urlField && data[_urlField]) ? data[_urlField] : "";
 		}
 		
 		/**
