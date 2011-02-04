@@ -4,6 +4,7 @@ package ab.osmf.spark.player
 	[SkinState("open")]
 	
 	import flash.events.MouseEvent;
+	import flash.utils.Dictionary;
 	
 	import spark.components.Button;
 	import spark.components.supportClasses.SkinnableComponent;
@@ -20,6 +21,12 @@ package ab.osmf.spark.player
 	 */
 	public class VolumeControl extends SkinnableComponent
 	{
+
+		private static const _MINIMUM_VOLUME:Number = 0;
+
+		private static const _MAXIMUM_VOLUME:Number = 1;
+
+		public static const SLIDER_SNAP_INTERVAL:Number = .05;
 		[SkinPart(required="true")]
 		/**
 		 * Doubles as the "speaker" icon for the volume control as well as a mute
@@ -32,7 +39,9 @@ package ab.osmf.spark.player
 		 * The volume slider component.
 		 */
 		public var ui_volumeSlider:SliderBase;
+		
 		private var _currentVolume:Number;
+		protected var skinPartInitializationClosures:Dictionary;
 		
 		/**
 		 * @Constructor
@@ -60,6 +69,14 @@ package ab.osmf.spark.player
 		private function _init():void
 		{
 			setStyle("skinClass", VolumeControlDefaultSkin);
+			mapSkinPartInitializationClosures();
+		}
+		
+		protected function mapSkinPartInitializationClosures():void
+		{
+			skinPartInitializationClosures							= new Dictionary();
+			skinPartInitializationClosures["ui_volumeSlider"]		= initializeSlider;
+			skinPartInitializationClosures["ui_btn_volumeIcon"]		= initializeVolumeIcon;
 		}
 		
 		override protected function getCurrentSkinState():String
@@ -71,16 +88,13 @@ package ab.osmf.spark.player
 		{
 			super.partAdded(partName, instance);
 			
-			switch (instance)
+			try
 			{
-				case ui_volumeSlider:
-					_initSlider();
-					_setSlider();
-					break;
-				
-				case ui_btn_volumeIcon:
-					ui_btn_volumeIcon.addEventListener(MouseEvent.CLICK, _handleMuteClick, false, 0, true);
-					break;
+				skinPartInitializationClosures[partName]();
+			}
+			catch (e:Error)
+			{
+				//trace("Skin part does not have an initialization closure: " + partName);
 			}
 		}
 
@@ -89,20 +103,35 @@ package ab.osmf.spark.player
 			const volumeEvent:VolumeEvent = new VolumeEvent(VolumeEvent.TOGGLE_MUTE);
 			dispatchEvent(volumeEvent);
 		}
-
-		private function _initSlider():void
+		
+		/**
+		 * Initializes the volume icon/button.
+		 * 
+		 */		
+		protected function initializeVolumeIcon():void
 		{
-			ui_volumeSlider.minimum = 0;
-			ui_volumeSlider.maximum = 1;
-			ui_volumeSlider.snapInterval = .05;
+			ui_btn_volumeIcon.addEventListener(MouseEvent.CLICK, _handleMuteClick, false, 0, true);
+		}
+
+		/**
+		 * Initializes the volume slider component.
+		 * 
+		 */		
+		protected function initializeSlider():void
+		{
+			ui_volumeSlider.minimum			= _MINIMUM_VOLUME;
+			ui_volumeSlider.maximum			= _MAXIMUM_VOLUME;
+			ui_volumeSlider.snapInterval	= SLIDER_SNAP_INTERVAL;
 			
 			ui_volumeSlider.addEventListener(TrackBaseEvent.THUMB_DRAG, _handleThumbDrag, false, 0, true);
+			
+			_setSlider();
 		}
 
 		private function _handleThumbDrag(event:TrackBaseEvent):void
 		{
-			const volumeEvent:VolumeEvent = new VolumeEvent(VolumeEvent.VOLUME_CHANGED);
-			volumeEvent.volume = ui_volumeSlider.value;
+			const volumeEvent:VolumeEvent	= new VolumeEvent(VolumeEvent.VOLUME_CHANGED);
+			volumeEvent.volume				= ui_volumeSlider.value;
 			dispatchEvent(volumeEvent);
 		}
 		

@@ -1,6 +1,8 @@
 package ab.osmf.spark.player
 {
 	
+	import flash.utils.Dictionary;
+	
 	import mx.core.UIComponent;
 	
 	import org.osmf.containers.MediaContainer;
@@ -27,22 +29,60 @@ package ab.osmf.spark.player
 		 */
 		public var ui_mediaPlayerContainer:SkinnableContainer;
 		
+		
+		/**
+		 * @private
+		 */
 		private var _sprite:SpriteVisualElement;
+		/**
+		 * @private
+		 */
 		private var _mediaContainer:MediaContainer;
+		/**
+		 * @private
+		 */
 		private var _screenWidth:Number;
+		/**
+		 * @private
+		 */
 		private var _screenHeight:Number;
 		
+		/**
+		 * Dictionary of initialization functions for skin parts.
+		 */		
+		protected var skinPartInitializationClosures:Dictionary;
+		
+		/**
+		 * @Constructor
+		 */		
 		public function SparkMediaContainer()
 		{
 			super();
 			_init();
 		}
-
+		
+		/**
+		 * Initializes the SparkMediaContainer component.
+		 * 
+		 */
 		private function _init():void
 		{
 			setStyle("skinClass", SparkMediaContainerDefaultSkin);
+			mapSkinPartInitializationClosures();
+		}
+		/**
+		 * Maps the initialization functions to skin part names for use in partAdded.
+		 * 
+		 */
+		protected function mapSkinPartInitializationClosures():void
+		{
+			skinPartInitializationClosures									= new Dictionary();
+			skinPartInitializationClosures["ui_mediaPlayerContainer"]		= initializeMediaPlayerContainer;
 		}
 		
+		/**
+		 * @private 
+		 */		
 		protected function get mediaContainer():MediaContainer
 		{
 			return _mediaContainer;
@@ -59,56 +99,55 @@ package ab.osmf.spark.player
 			
 			/**TRACEDISABLE:trace("SparkMediaContainer :: addMedia()");*/
 		}
-		
+		/**
+		 * Removes a MediaElement from the MediaContainer.
+		 * 
+		 * @param mediaElement
+		 * 
+		 */		
 		public function removeMediaElement(mediaElement:MediaElement):void
 		{
 			mediaContainer.removeMediaElement(mediaElement);
 		}
-		
-		override protected function getCurrentSkinState():String
-		{
-			return super.getCurrentSkinState();
-		} 
-		
+		/**
+		 * Override to initialize skin parts.
+		 * 
+		 * @param partName
+		 * @param instance
+		 * 
+		 */		
 		override protected function partAdded(partName:String, instance:Object) : void
 		{
 			super.partAdded(partName, instance);
 			
-			switch (instance)
+			try
 			{
-				case ui_mediaPlayerContainer:
-					_sprite = new SpriteVisualElement();
-					_mediaContainer = new MediaContainer();
-					_sprite.addChild(_mediaContainer);
-					ui_mediaPlayerContainer.addElement(_sprite);
-					
-					
-					/**TRACEDISABLE:trace("***width = " + _screenWidth);*/
-					/**TRACEDISABLE:trace("***height = " + _screenHeight);*/
-					setSize(_screenWidth, _screenHeight);
-//					_sprite.width = width;
-//					_sprite.height = height;
-//					_mediaContainer.width = width;
-//					_mediaContainer.height = height;
-					break;
+				skinPartInitializationClosures[partName]();
+			} 
+			catch(error:Error) 
+			{
+				//trace("Skin part does not have an initialization closure: " + partName);
 			}
 		}
-		
-		override protected function partRemoved(partName:String, instance:Object) : void
+		/**
+		 * Initializes the media player container skin part.
+		 * 
+		 */		
+		protected function initializeMediaPlayerContainer():void
 		{
-			super.partRemoved(partName, instance);
+			_sprite					= new SpriteVisualElement();
+			_mediaContainer			= new MediaContainer();
+			_sprite.addChild(_mediaContainer);
+			ui_mediaPlayerContainer.addElement(_sprite);
+			setSize(_screenWidth, _screenHeight);
 		}
-		
-		override public function set height(value:Number):void
-		{
-			super.height = value;
-		}
-		
-		override public function set width(value:Number):void
-		{
-			super.width = value;
-		}
-
+		/**
+		 * Sets the correct size to the media container and its Flex 4 parent holder container.
+		 * 
+		 * @param screenWidth
+		 * @param screenHeight
+		 * 
+		 */		
 		public function setSize(screenWidth:Number, screenHeight:Number):void
 		{
 			_screenWidth = screenWidth;
