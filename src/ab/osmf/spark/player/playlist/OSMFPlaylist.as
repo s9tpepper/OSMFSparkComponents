@@ -12,6 +12,7 @@ package ab.osmf.spark.player.playlist
 	import mx.core.ClassFactory;
 	import mx.core.IDataRenderer;
 	import mx.events.FlexEvent;
+	import mx.styles.CSSStyleDeclaration;
 	import mx.utils.ObjectUtil;
 	
 	import org.osmf.media.DefaultMediaFactory;
@@ -363,9 +364,25 @@ package ab.osmf.spark.player.playlist
 		{
 			mapSkinPartInitializationClosures();
 			
-			setStyle("skinClass", OSMFPlaylistDefaultSkin);
+			checkSkin("ab.osmf.spark.player.playlist.OSMFPlaylist", OSMFPlaylistDefaultSkin);
 			
 			addEventListener(FlexEvent.CREATION_COMPLETE, _handleCreationComplete,false,0,true);
+		}
+		/**
+		 * Checks that the component has a skin declared, if not assigns the default skin.
+		 *
+		 * @param selector
+		 * @param defaultSkin
+		 *
+		 */            
+		private function checkSkin(selector:String, defaultSkin:Class):void
+		{
+			if (styleManager.selectors.lastIndexOf(selector) == -1)
+			{
+				const cssDeclaration:CSSStyleDeclaration        = new CSSStyleDeclaration(selector);
+				cssDeclaration.setStyle("skinClass", defaultSkin);
+				styleManager.setStyleDeclaration(selector, cssDeclaration, true);
+			}
 		}
 		/**
 		 * @private

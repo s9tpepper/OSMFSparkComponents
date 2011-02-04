@@ -8,6 +8,7 @@ package ab.osmf.spark.player
 	import flash.utils.Dictionary;
 	
 	import mx.formatters.DateFormatter;
+	import mx.styles.CSSStyleDeclaration;
 	
 	import org.osmf.events.PlayEvent;
 	import org.osmf.events.SeekEvent;
@@ -290,10 +291,26 @@ package ab.osmf.spark.player
 			
 			_attachListeners(_mediaPlayer);
 			
-			setStyle("skinClass", OSMFSparkPlayerDefaultSkin);
+			checkSkin("ab.osmf.spark.player.OSMFSparkPlayer", OSMFSparkPlayerDefaultSkin);
 			
 			mapPartInitializers();
 			mapPlayStateChangeClosures();
+		}
+		/**
+		 * Checks that the component has a skin declared, if not assigns the default skin.
+		 *
+		 * @param selector
+		 * @param defaultSkin
+		 *
+		 */            
+		private function checkSkin(selector:String, defaultSkin:Class):void
+		{
+			if (styleManager.selectors.lastIndexOf(selector) == -1)
+			{
+				const cssDeclaration:CSSStyleDeclaration        = new CSSStyleDeclaration(selector);
+				cssDeclaration.setStyle("skinClass", defaultSkin);
+				styleManager.setStyleDeclaration(selector, cssDeclaration, true);
+			}
 		}
 		/**
 		 * @private 

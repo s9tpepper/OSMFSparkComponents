@@ -141,7 +141,7 @@ package ab.osmf.spark.player
 		{
 			mapSkinPartInitializers();
 			
-			_checkSkin("ab.osmf.spark.player.LoadableMediaScrubber", LoadableMediaScrubberDefaultSkin);
+			checkSkin("ab.osmf.spark.player.LoadableMediaScrubber", LoadableMediaScrubberDefaultSkin);
 		}
 		/**
 		 * Checks that the component has a skin declared, if not assigns the default skin.
@@ -150,7 +150,7 @@ package ab.osmf.spark.player
 		 * @param defaultSkin
 		 *
 		 */            
-		private function _checkSkin(selector:String, defaultSkin:Class):void
+		private function checkSkin(selector:String, defaultSkin:Class):void
 		{
 			if (styleManager.selectors.lastIndexOf(selector) == -1)
 			{

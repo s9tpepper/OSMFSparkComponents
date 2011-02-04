@@ -4,6 +4,7 @@ package ab.osmf.spark.player
 	import flash.utils.Dictionary;
 	
 	import mx.core.UIComponent;
+	import mx.styles.CSSStyleDeclaration;
 	
 	import org.osmf.containers.MediaContainer;
 	import org.osmf.media.MediaElement;
@@ -67,8 +68,24 @@ package ab.osmf.spark.player
 		 */
 		private function _init():void
 		{
-			setStyle("skinClass", SparkMediaContainerDefaultSkin);
+			checkSkin("ab.osmf.spark.player.SparkMediaContainer", SparkMediaContainerDefaultSkin);
 			mapSkinPartInitializationClosures();
+		}
+		/**
+		 * Checks that the component has a skin declared, if not assigns the default skin.
+		 *
+		 * @param selector
+		 * @param defaultSkin
+		 *
+		 */            
+		private function checkSkin(selector:String, defaultSkin:Class):void
+		{
+			if (styleManager.selectors.lastIndexOf(selector) == -1)
+			{
+				const cssDeclaration:CSSStyleDeclaration        = new CSSStyleDeclaration(selector);
+				cssDeclaration.setStyle("skinClass", defaultSkin);
+				styleManager.setStyleDeclaration(selector, cssDeclaration, true);
+			}
 		}
 		/**
 		 * Maps the initialization functions to skin part names for use in partAdded.
