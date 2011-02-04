@@ -5,6 +5,7 @@ package ab.osmf.youtube
 	
 	import flash.utils.setTimeout;
 	
+	import org.osmf.events.TimeEvent;
 	import org.osmf.traits.TimeTrait;
 	
 	/**
@@ -23,11 +24,9 @@ package ab.osmf.youtube
 			super();
 			
 			_youTubePlayer = youTubePlayer;
-			_youTubePlayer.addEventListener(YouTubeEvent.PLAYBACK_PROGRESS, _handlePlayBackProgress);
-			
 			_setDuration();
 		}
-		
+
 		private function _setDuration():void
 		{
 			try
@@ -50,14 +49,6 @@ package ab.osmf.youtube
 			}
 		}
 
-		private function _handlePlayBackProgress(event:YouTubeEvent):void
-		{
-			if (event.timeElapsed == event.totalTime)
-			{
-				_youTubePlayer.removeEventListener(YouTubeEvent.PLAYBACK_PROGRESS, _handlePlayBackProgress);
-				signalComplete();
-			}
-		}
 		
 		override public function get currentTime():Number
 		{
@@ -70,6 +61,7 @@ package ab.osmf.youtube
 			{
 				currentTime = 0;
 			}
+
 			return currentTime;
 		}
 	}

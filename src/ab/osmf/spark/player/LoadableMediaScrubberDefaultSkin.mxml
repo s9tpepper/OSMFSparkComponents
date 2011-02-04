@@ -50,7 +50,7 @@
 		</s:Rect>
 		
 		
-		<s:Button id="ui_btn_thumb" width="10" height="9" alpha="0" />
+		<s:Button id="ui_btn_thumb" width="10" height="10" alpha="1" y="-1" cornerRadius="5" />
 		
 		
 		

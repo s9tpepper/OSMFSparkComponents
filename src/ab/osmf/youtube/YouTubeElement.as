@@ -14,6 +14,7 @@ package ab.osmf.youtube
 	import org.osmf.containers.MediaContainer;
 	import org.osmf.elements.loaderClasses.LoaderLoadTrait;
 	import org.osmf.elements.loaderClasses.LoaderUtils;
+	import org.osmf.events.TimeEvent;
 	import org.osmf.media.LoadableElementBase;
 	import org.osmf.media.MediaElement;
 	import org.osmf.media.MediaResourceBase;
@@ -22,6 +23,7 @@ package ab.osmf.youtube
 	import org.osmf.traits.LoaderBase;
 	import org.osmf.traits.MediaTraitBase;
 	import org.osmf.traits.MediaTraitType;
+	import org.osmf.traits.SeekTrait;
 	import org.osmf.traits.TimeTrait;
 	import org.osmf.utils.OSMFStrings;
 	
@@ -100,8 +102,20 @@ package ab.osmf.youtube
 			// Add time trait so OSMF can get YouTube's time
 			addTrait(MediaTraitType.TIME, new YouTubeTimeTrait(_youTubePlayer));
 			
+			// Listen for duration change so the seek trait can be added.
+			const youTubeTimeTrait:YouTubeTimeTrait = getTrait(MediaTraitType.TIME) as YouTubeTimeTrait;
+			youTubeTimeTrait.addEventListener(TimeEvent.DURATION_CHANGE, _handleDurationChange,false,0,true);
+		}
+
+		private function _handleDurationChange(event:TimeEvent):void
+		{
+			const youTubeTimeTrait:YouTubeTimeTrait = getTrait(MediaTraitType.TIME) as YouTubeTimeTrait;
+			if (youTubeTimeTrait && youTubeTimeTrait.hasEventListener(TimeEvent.DURATION_CHANGE))
+				youTubeTimeTrait.removeEventListener(TimeEvent.DURATION_CHANGE, _handleDurationChange);
+			
 			// Add seek trait so OSMF can seek YouTube video
-			addTrait(MediaTraitType.SEEK, new YouTubeSeekTrait(_youTubePlayer, getTrait(MediaTraitType.TIME) as TimeTrait));
+			addTrait(MediaTraitType.SEEK, new YouTubeSeekTrait(_youTubePlayer, getTrait(MediaTraitType.TIME) as YouTubeTimeTrait));
+//			addTrait(MediaTraitType.SEEK, new SeekTrait(getTrait(MediaTraitType.TIME) as YouTubeTimeTrait));
 		}
 		
 		override protected function createLoadTrait(resource:MediaResourceBase, loader:LoaderBase):LoadTrait
