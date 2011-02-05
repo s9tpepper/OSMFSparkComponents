@@ -120,6 +120,8 @@ package ab.osmf.spark.player.playlist
 
 
 
+
+
 		/**
 		 * The IPlaylistItemRenderer class to use for the playlist.  This property
 		 * defaults to the PlaylistRenderer class.
@@ -304,6 +306,11 @@ package ab.osmf.spark.player.playlist
 			
 			_initializePlayer();
 		}
+		
+		public function get player():OSMFSparkPlayer
+		{
+			return _player;
+		}
 
 		/**
 		 * @Constructor
@@ -440,27 +447,44 @@ package ab.osmf.spark.player.playlist
 			
 			if (item)
 			{
-				var itemUrl:String = "";
-				try
+				updateMediaElement(item);
+			}
+		}
+		
+		protected function updateMediaElement(item:Object):void
+		{
+			var itemUrl:String = "";
+			try
+			{
+				itemUrl = item[_urlField];
+			}
+			catch (e:Error){}
+		
+			if (itemUrl && itemUrl.length)
+			{
+				const mediaResourceBase:MediaResourceBase = createMediaResource(itemUrl);
+		
+				if (mediaResourceBase)
 				{
-					itemUrl = item[_urlField];
-				}
-				catch (e:Error){}
-				
-				if (itemUrl && itemUrl.length)
-				{
-					const mediaResourceBase:MediaResourceBase = getUrlResource(itemUrl);
-					
-					if (mediaResourceBase)
-					{
-						const element:MediaElement = OSMFPlaylist.mediaFactory.createMediaElement(mediaResourceBase);
-						
-						if (element)
-							_player.mediaElement = element;
-					}
+					const element:MediaElement = createMediaElement(mediaResourceBase);
+		
+					if (element)
+						_player.mediaElement = element;
 				}
 			}
 		}
+		
+		protected function createMediaElement(mediaResourceBase:MediaResourceBase):MediaElement
+		{
+			return OSMFPlaylist.mediaFactory.createMediaElement(mediaResourceBase);
+		}
+		
+		protected function createMediaResource(itemUrl:String):MediaResourceBase
+		{
+			return getUrlResource(itemUrl);
+		}
+
+
 		/**
 		 * @private
 		 */	
