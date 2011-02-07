@@ -131,6 +131,8 @@ package ab.osmf.spark.player
 				addEventListener(MouseEvent.ROLL_OVER,_handleVolumeControlsRollOver,false,0,true);
 				addEventListener(MouseEvent.ROLL_OUT, _handleVolumeControlsRollOut,false,0,true);
 			}
+			
+			_switchToClosedState();
 		}
 		
 		private function _handleVolumeControlsRollOver(event:MouseEvent):void
@@ -154,7 +156,7 @@ package ab.osmf.spark.player
 			_rolledOutStateChangeDelay.start();
 		}
 
-		private function _switchToClosedState(event:TimerEvent):void
+		private function _switchToClosedState(event:TimerEvent=null):void
 		{
 			_currentSkinState = "closed";
 			invalidateSkinState();
