@@ -120,6 +120,10 @@ package ab.osmf.spark.player
 		 * @private
 		 */		
 		private var _timeDisplayFormat:String = "J:NN:SS";
+		/**
+		 * @private
+		 */		
+		private var _enableAutoHideVolumeSlider:Boolean = false;
 		
 		/**
 		 * Initialization function map for skin parts.
@@ -131,6 +135,25 @@ package ab.osmf.spark.player
 		protected var playStateChangeClosures:Dictionary;
 		
 		
+
+
+		public function get enableAutoHideVolumeSlider():Boolean
+		{
+			return _enableAutoHideVolumeSlider;
+		}
+
+		public function set enableAutoHideVolumeSlider(value:Boolean):void
+		{
+			_enableAutoHideVolumeSlider = value;
+			
+			_updateAutoHideHandling();
+		}
+
+		private function _updateAutoHideHandling():void
+		{
+			if (ui_volumeControl)
+				ui_volumeControl.autoHideVolumeSlider = _enableAutoHideVolumeSlider;
+		}
 
 		/**
 		 * The display format to use for the time remaining/elapsed.  This string
@@ -598,6 +621,7 @@ package ab.osmf.spark.player
 				ui_volumeControl.setVolume(_mediaPlayer.volume);
 				ui_volumeControl.addEventListener(VolumeEvent.VOLUME_CHANGED, _handleVolumeChange, false, 0, true);
 				ui_volumeControl.addEventListener(VolumeEvent.TOGGLE_MUTE, _handleMuteChange, false, 0, true);
+				ui_volumeControl.autoHideVolumeSlider = _enableAutoHideVolumeSlider;
 			}
 		}
 		/**

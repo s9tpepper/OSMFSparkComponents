@@ -54,8 +54,8 @@
 			
 			<s:RichText id="ui_txt_elapsedTimeDisplay" color="#FFFFFF" columnCount="1" width="60" textAlign="right"
 						fontFamily="Arial" fontSize="12.7119" kerning="on" tabStops="S28.6018009185791" text="0:00" whiteSpaceCollapse="preserve"/>
-			<s:RichText color="#FFFFFF" columnCount="1" text="/" 
-						fontFamily="Arial" fontSize="12.7119" kerning="on" tabStops="S28.6018009185791" whiteSpaceCollapse="preserve"/>
+			<s:Label color="#FFFFFF" text="/" 
+						fontFamily="Arial" fontSize="12.7119" kerning="on" />
 			<s:RichText id="ui_txt_remainingTimeDisplay" color="#FFFFFF" columnCount="1" width="60"
 						fontFamily="Arial" fontSize="12.7119" kerning="on" tabStops="S28.6018009185791" text="0:00" whiteSpaceCollapse="preserve"/>
 			

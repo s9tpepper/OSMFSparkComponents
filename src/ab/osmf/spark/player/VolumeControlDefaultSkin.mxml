@@ -23,6 +23,6 @@
 	</s:layout>
 	
 	<s:Button id="ui_btn_volumeIcon" skinClass="ab.osmf.spark.player.MuteButtonDefaultSkin" />
-	<s:HSlider id="ui_volumeSlider" skinClass="ab.osmf.spark.player.VolumeSliderDefaultSkin" height="4" />
+	<s:HSlider id="ui_volumeSlider" skinClass="ab.osmf.spark.player.VolumeSliderDefaultSkin" height="4" includeIn="open" />
 	
 </s:Skin>

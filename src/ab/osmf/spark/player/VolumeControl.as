@@ -4,11 +4,14 @@ package ab.osmf.spark.player
 	[SkinState("open")]
 	
 	import flash.events.MouseEvent;
+	import flash.events.TimerEvent;
 	import flash.utils.Dictionary;
+	import flash.utils.Timer;
 	
 	import mx.styles.CSSStyleDeclaration;
 	
 	import spark.components.Button;
+	import spark.components.supportClasses.ButtonBase;
 	import spark.components.supportClasses.SkinnableComponent;
 	import spark.components.supportClasses.SliderBase;
 	import spark.events.TrackBaseEvent;
@@ -38,7 +41,7 @@ package ab.osmf.spark.player
 		 * Doubles as the "speaker" icon for the volume control as well as a mute
 		 * button when clicked.
 		 */
-		public var ui_btn_volumeIcon:Button;
+		public var ui_btn_volumeIcon:ButtonBase;
 		
 		[SkinPart(required="true")]
 		/**
@@ -55,6 +58,10 @@ package ab.osmf.spark.player
 		 * Dictionary mapping skin part names to initialization functions for partAdded().
 		 */		
 		protected var skinPartInitializationClosures:Dictionary;
+
+		private var _autoHideVolumeSlider:Boolean = false;
+		private var _rolledOutStateChangeDelay:Timer;
+		private var _currentSkinState:String = "open";
 		
 		/**
 		 * @Constructor
@@ -73,6 +80,88 @@ package ab.osmf.spark.player
 			
 			_setSlider();
 		}
+
+		public function get autoHideVolumeSlider():Boolean
+		{
+			return _autoHideVolumeSlider;
+		}
+
+		public function set autoHideVolumeSlider(value:Boolean):void
+		{
+			_autoHideVolumeSlider = value;
+			
+			_updateAutoHideHandling();
+		}
+		
+		private function _updateAutoHideHandling():void
+		{
+			if (_autoHideVolumeSlider)
+				_enableAutoHideVolumeSliderStates();
+			else
+				_disableAutoHideVolumeSliderStates();
+		}
+		
+		private function _disableAutoHideVolumeSliderStates():void
+		{
+			_removeAutoHideHandlers();
+			_switchToOpenState();
+		}
+
+		private function _switchToOpenState():void
+		{
+			_currentSkinState = "open";
+			invalidateSkinState();
+		}
+
+
+		private function _removeAutoHideHandlers():void
+		{
+			if (hasEventListener(MouseEvent.ROLL_OVER))
+				removeEventListener(MouseEvent.ROLL_OVER,_handleVolumeControlsRollOver);
+		
+			if (hasEventListener(MouseEvent.ROLL_OUT))
+				removeEventListener(MouseEvent.ROLL_OUT, _handleVolumeControlsRollOut);
+		}
+
+		
+		private function _enableAutoHideVolumeSliderStates():void
+		{
+			if (!hasEventListener(MouseEvent.ROLL_OVER))
+			{
+				addEventListener(MouseEvent.ROLL_OVER,_handleVolumeControlsRollOver,false,0,true);
+				addEventListener(MouseEvent.ROLL_OUT, _handleVolumeControlsRollOut,false,0,true);
+			}
+		}
+		
+		private function _handleVolumeControlsRollOver(event:MouseEvent):void
+		{
+			if (_rolledOutStateChangeDelay != null)
+			{
+				_rolledOutStateChangeDelay.reset();
+			}
+			
+			_switchToOpenState();
+		}
+		
+		private function _handleVolumeControlsRollOut(event:MouseEvent):void
+		{
+			if (!_rolledOutStateChangeDelay)
+			{
+				_rolledOutStateChangeDelay = new Timer(1500);
+				_rolledOutStateChangeDelay.addEventListener(TimerEvent.TIMER, _switchToClosedState, false, 0, true);
+			}
+			
+			_rolledOutStateChangeDelay.start();
+		}
+
+		private function _switchToClosedState(event:TimerEvent):void
+		{
+			_currentSkinState = "closed";
+			invalidateSkinState();
+		}
+		
+		
+		
 		/**
 		 * @private
 		 */
@@ -173,6 +262,11 @@ package ab.osmf.spark.player
 			{
 				//trace("Skin part does not have an initialization closure: " + partName);
 			}
+		}
+		
+		protected override function getCurrentSkinState():String
+		{
+			return _currentSkinState;
 		}
 	}
 }
